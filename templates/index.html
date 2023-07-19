@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Note Making Website</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="myjs.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Poppins">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.container3 {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar ul li {
+  margin-right: 20px;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-bar input[type="text"] {
+  width: 300px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-button {
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: plum;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.notes {
+  display: list-item;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.note {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.note h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.note p {
+  margin-bottom: 0;
+  color: #777;
+}
+.submit_form{
+
+text-align: center;
+padding: 3%;
+background: rgb(199, 125, 199);
+
+border-radius: 25px;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),
+            0 6px 20px 0 rgba(0,0,0,0.36);
+}
+.color-button {
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    
+    /* Styling for the button when clicked */
+    .color-button.clicked {
+        background-color: green;
+    }
+.size{
+    width: 100%;
+
+}
+
+  </style>
+</head>
+<body>
+    <nav  style="border-radius:0px !important; margin:0;border: 0">
+        <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>                       
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="user"></span> profile</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> logout</a></li>
+                    {% else %}
+                    <li><a href="" data-toggle="modal" data-target="#myModal"></span> Login or signup</a></li>
+                    {%endif%}
+                </ul>
+
+                <form class="navbar-form navbar-right">
+                  <div class="input-group">
+                    <div class="search-bar">
+                    <input type="text" placeholder="Search notes...">
+                    <button class="search-button">Search</button>
+                  </div>
+                    </div>
+                  </div>
+                </form>
+            </div>	
+        </div>
+    </nav>  
+  <div class="container3">
+    {% if user.is_authenticated%}
+    <h1 style="color: rgb(194, 116, 194);">{{user.username}}, welcome to Note Maker</h1>
+    {%else%}
+    <h1 style="color: rgb(194, 116, 194);">welcome to Note Maker</h1>
+    {%endif%}
+<div class=""> </div>
+<!-- <div class="size" >
+<div class="submit_form" >
+<form method="POST">
+    <center>
+    <input type="submit" class="btn btn-default" value="ADD" />
+</center>
+</form> 
+
+</div>
+</div> -->
+<button><a href="AddNote">add</a></button>
+</div>
+
+</div>
+<div class="container">
+  {% for i in at %}
+    <div class="notes">
+      <div class="note">
+        <h2>{{i.chapter}}</h2>
+        <p>{{i.notes}}</p>
+        <p>{{i.image}}</p>
+      </div>
+      <br><!-- 
+      <div class="note">
+        <h2>Note 2</h2>
+        <p>This is the content of Note 2.</p>
+      </div>
+      <br>
+      <div class="note">
+        <h2>Note 3</h2>
+        <p>This is the content of Note 3.</p>
+      </div>
+      <br> -->
+    </div>
+    {%endfor%}
+  </div>
+  <div class="modal fade" id="myModal" role="dialog" style="padding: 10rem">
+    <div class="modal-dialog">
+    
+          <!-- Modal content-->
+        <div class="modal-content trans-input-area">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title" style="text-align:center;">Log In</h4>
+            </div>
+            <form action="/" method="post" >
+              {% csrf_token %}
+            <div class="modal-body form-group trans-input-area">
+                <label><b>Email</b></label>
+                  <input type="text" class="form-control" placeholder="example@email.com" name="username" required>
+                  <br>
+                  <label><b>Password</b></label>
+                  <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+                <br>
+                  <button class="btn btn-block form-control" type="submit" style="background-color: grey; color: white"><b>Login</b></button>
+                <br>					
+                <b style="text-align: center;">or</b>
+                <button class="btn btn-block form-control" type="submit" style="background-color: grey; color: white"><a href="register"><b>signup</b></a></button>
+            </div>
+            </form>
+
+            <div class="modal-footer">
+                  <button type="button" class="btn btn-block" data-dismiss="modal" style="background-color: grey;"><b>Cancel</b></button>
+            </div>
+        </div>
+      
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>
