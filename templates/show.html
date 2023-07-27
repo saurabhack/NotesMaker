@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Display</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  color: #007BFF;
+}
+
+h2 {
+  color: #343A40;
+  margin-top: 15px;
+}
+
+p {
+  color: #6C757D;
+  margin-top: 10px;
+  word-spacing: 10px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>{{item.subject}}</h1>
+    <h2>{{item.chapter}}</h2>
+    <p><i>{{item.notes|safe}}</i></p>
+  </div>
+</body>
+</html>

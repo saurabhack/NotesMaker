@@ -20,7 +20,7 @@ body {
 /* Form styles */
 form {
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 800px;
   padding: 20px;
   background-color: #f2f2f2;
   border: 1px solid #ccc;
@@ -61,9 +61,10 @@ button:hover {
     </style>
 </head>
 <body>
-    
+    <h1 style="text-align: center;">create your notes</h1>
 <form method="post" action="" >
     {% csrf_token %}
+    {{forms.media}}
     {{forms}}
     <!-- 
     <label for="subject"> enter your subject </label>
@@ -82,6 +83,7 @@ button:hover {
     <label for="notes">enter your notes</label>
     <br>
     <textarea name="notes" id="" cols="30" rows="30"></textarea> -->
+    <br>
     
     <button>add Notes</button>
 
